@@ -63,3 +63,32 @@ SELECT * FROM total_medication('OP000000004');
 SELECT * FROM total_medication('IP000000013');
 
 ---- d)
+CREATE OR REPLACE PROCEDURE Number_Patients
+( Lower_bound IN treatment.startdate%TYPE,
+upper_bound IN treatment.enddate%TYPE
+)
+IS
+CURSOR total_work IS WITH Doctor_work
+                     AS
+                     (
+                        SELECT DISTINCT DOCTOR, Patient
+                        FROM examination
+                        WHERE examination.dateexam >= Lower_bound  AND examination.dateexam  <upper_bound
+                        UNION
+                        SELECT DISTINCT DOCTOR, Patient
+                        FROM Treatment
+                        WHERE TREATMENT.STARTDATE >= Lower_bound AND treatment.ENDdate <upper_bound
+                     )
+                        SELECT FIRSTNAME, LASTNAME, COUNT(1) AS NUM_PATIENT
+                        FROM Doctor_work JOIN employee ON Doctor_work.doctor = employee.code
+                        GROUP BY FIRSTNAME, LASTNAME  
+                        ORDER BY COUNT(1) ;
+BEGIN
+FOR r_total_work IN total_work
+    LOOP
+    DBMS_output.put_line(r_total_work.FIRSTNAME||' '||r_total_work.LASTNAME||' '||r_total_work.NUM_PATIENT);
+    END LOOP;
+END;
+SET SERVEROUTPUT ON;
+EXEC Number_Patients(TO_DATE('2016-01-01','YYYY-MM-DD'),TO_DATE('2016-12-31','YYYY-MM-DD'));
+
