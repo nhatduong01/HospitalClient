@@ -55,3 +55,11 @@
   background: #ffc500;
   font-family: "Kanit", sans-serif;
 }
+.SignUp {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.Linkregister {
+  color: #ffc500;
+}

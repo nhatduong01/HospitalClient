@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
-import { Link } from "react-router-dom";
-function Login() {
+function Register() {
   const [user, setuser] = useState("");
   const [password, setpassword] = useState("");
-  const SignIn = () => {
+  const register = () => {
     axios
-      .post("http://localhost:4000/login", {
-        userlog: user,
-        passwordlog: password,
+      .post("http://localhost:4000/register", {
+        userReg: user,
+        passwordReg: password,
       })
       .then((Response) => {
         console.log(Response);
@@ -18,7 +17,7 @@ function Login() {
   return (
     <div className="LoginContainer">
       <div className="FormContainer">
-        <h2>Sign In</h2>
+        <h2>Register</h2>
         <form className="FormContain">
           <h5>Username</h5>
           <input
@@ -34,18 +33,17 @@ function Login() {
               setpassword(e.target.value);
             }}
           />
-          <button className="login_signinbutton" type="submit" onClick={SignIn}>
-            Sign In
+          <button
+            className="login_signinbutton"
+            type="submit"
+            onClick={register}
+          >
+            Register
           </button>
         </form>
-        <div className="SignUp">
-          <Link to="/register" className="Linkregister">
-            Do not have an account?
-          </Link>
-        </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
