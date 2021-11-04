@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 function Login() {
+  const history = useHistory();
   const [user, setuser] = useState("");
   const [password, setpassword] = useState("");
-  const SignIn = () => {
+  const [login, setlogin] = useState("");
+  const SignIn = (e) => {
+    e.preventDefault();
     axios
       .post("http://localhost:4000/login", {
         userlog: user,
         passwordlog: password,
       })
       .then((Response) => {
-        console.log(Response);
+        if (Response.data.message) {
+          setlogin(Response.data.message);
+        } else {
+          history.push("/homepage");
+        }
       });
   };
   return (
@@ -44,6 +51,7 @@ function Login() {
           </Link>
         </div>
       </div>
+      <h2>{login}</h2>
     </div>
   );
 }

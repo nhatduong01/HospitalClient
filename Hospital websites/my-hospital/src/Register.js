@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
+import { useHistory } from "react-router";
 function Register() {
+  const history = useHistory();
   const [user, setuser] = useState("");
   const [password, setpassword] = useState("");
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault();
     axios
       .post("http://localhost:4000/register", {
         userReg: user,
@@ -13,6 +16,7 @@ function Register() {
       .then((Response) => {
         console.log(Response);
       });
+    history.push("/homepage");
   };
   return (
     <div className="LoginContainer">

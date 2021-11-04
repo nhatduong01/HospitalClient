@@ -1,0 +1,8 @@
+.HomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fourbuttons > button {
+  margin: 10px;
+}

@@ -9,6 +9,9 @@
   filter: grayscale(30%);
   justify-content: center;
 }
+.LoginContainer > h2 {
+  color: #ffc500;
+}
 .FormContainer {
   width: 300px;
   height: fit-content;
