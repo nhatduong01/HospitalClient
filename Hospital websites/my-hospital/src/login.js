@@ -33,6 +33,7 @@ function Login() {
             onChange={(e) => {
               setuser(e.target.value);
             }}
+            required
           />
           <h5>Password</h5>
           <input
@@ -40,6 +41,7 @@ function Login() {
             onChange={(e) => {
               setpassword(e.target.value);
             }}
+            required
           />
           <button className="login_signinbutton" type="submit" onClick={SignIn}>
             Sign In

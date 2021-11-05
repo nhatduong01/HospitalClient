@@ -9,6 +9,7 @@ function AddPatient() {
   const [DOB, setDOB] = useState("");
   const [Gender, setGender] = useState("");
   const [Address, setAddress] = useState("");
+  const [result, setresult] = useState("");
   const AddPatientIN = (e) => {
     e.preventDefault();
     console.log("addpatient");
@@ -22,7 +23,8 @@ function AddPatient() {
         newAddress: Address,
       })
       .then((Response) => {
-        console.log(Response);
+        setresult(Response.data);
+        console.log(result);
       });
   };
   return (
