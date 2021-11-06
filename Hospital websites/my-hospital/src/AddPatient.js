@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddPatient.css";
-import { Link } from "react-router-dom";
+import "./lib/bootstrap/bootstrap.min.css";
 function AddPatient() {
   const [patientID, setpatientID] = useState("");
   const [FName, setFName] = useState("");
@@ -89,7 +89,9 @@ function AddPatient() {
           Add
         </button>
       </form>
-      <Link to="/homepage">Home</Link>
+      <a href="./homepage" class="btn btn-secondary text-white">
+        Turn back
+      </a>
     </div>
   );
 }

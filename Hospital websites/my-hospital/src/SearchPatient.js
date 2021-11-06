@@ -1,48 +1,6 @@
-// import React, { useState } from "react";
-// import "./SearchPatient.css";
-// import axios from "axios";
-// function SearchPatient() {
-//   const [ID, setID] = useState("");
-//   const [result, setresult] = useState([]);
-//   const searchpatientinfo = (e) => {
-//     e.preventDefault();
-//     axios
-//       .post("http://localhost:4000/searchpatientinfo", {
-//         patientID: ID,
-//       })
-//       .then((Response) => {
-//         console.log(Response);
-//         setresult(Response.data);
-//       });
-//   };
-//   return (
-//     <div className="SearchBar">
-//       <form>
-//         <label>
-//           <span>Enter patient ID</span>
-//         </label>
-//         <input
-//           type="text"
-//           placeholder="PatientID"
-//           required
-//           onChange={(e) => {
-//             setID(e.target.value);
-//           }}
-//         ></input>
-//         <button type="submit" onClick={searchpatientinfo}>
-//           Search
-//         </button>
-//         <button>Go back</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default SearchPatient;
 import React, { useState, useEffect } from "react";
 import "./SearchPatient.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./lib/bootstrap/bootstrap.min.css";
 var patient = [];
 function SearchPatient() {
@@ -60,7 +18,55 @@ function SearchPatient() {
         console.log(Response.data);
       });
   };
-
+  const RenderTable = (result, ID) => {
+    if (ID[0] == "I") {
+      return (
+        <tbody>
+          <td>{result?.First_name}</td>
+          <td>{result?.LAst_name}</td>
+          <td>{result?.Result}</td>
+          <td>{result?.StartDate}</td>
+          <td>{result?.EndDate}</td>
+          <td>{result?.patient_phone}</td>
+        </tbody>
+      );
+    } else {
+      return (
+        <tbody>
+          <td>{result?.First_name}</td>
+          <td>{result?.LAst_name}</td>
+          <td>{result?.diagnosis}</td>
+          <td>{result?.DateExam}</td>
+          <td>{result?.patient_phone}</td>
+        </tbody>
+      );
+    }
+  };
+  const renderheader = () => {
+    console.log("hello");
+    if (ID[0] == "I") {
+      return (
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Result</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
+          <th>Phone Number</th>
+        </tr>
+      );
+    } else {
+      return (
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Diagnosis</th>
+          <th>Date Examination</th>
+          <th>Phone Number</th>
+        </tr>
+      );
+    }
+  };
   return (
     <div>
       <div className="SearchBar">
@@ -99,20 +105,9 @@ function SearchPatient() {
           <div className="card-block table-border-style">
             <div className="table-responsive">
               <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Result</th>
-                    <th>Date of birth</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <td text="firstname">{resultpatient[0]?.First_name}</td>
-                  <td text="lastname">{resultpatient[0]?.LAst_name}</td>
-                  <td text="gender">Male</td>
-                  <td text="DoB">11/12/2008</td>
-                </tbody>
+                <thead>{renderheader}</thead>
+
+                {resultpatient.map((result) => RenderTable(result, ID))}
               </table>
             </div>
           </div>
