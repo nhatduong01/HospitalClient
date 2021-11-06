@@ -77,7 +77,7 @@ function AddPatient() {
           }}
           required
         ></input>
-         <label> Address</label>
+         <label className="Addressinput"> Address</label>
         <input
           placeholder="Please enter address"
           onChange={(e) => {

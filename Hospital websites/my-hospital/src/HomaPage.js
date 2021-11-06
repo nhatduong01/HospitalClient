@@ -5,7 +5,7 @@ function HomaPage() {
   const history = useHistory();
   return (
     <div className="HomePage">
-      <h1>Choose a Patient</h1>
+      <h1>Choose a function</h1>
       <div className="fourbuttons">
         <button
           onClick={(e) => {
