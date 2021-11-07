@@ -7,6 +7,8 @@ import AddPatient from "./AddPatient";
 import SearchPatient from "./SearchPatient";
 import ListPatient from "./SearchDoctor";
 import MakeReport from "./MakeReport";
+import AddOP from "./AddOP";
+import AddIP from "./AddIP";
 function App() {
   return (
     <Router>
@@ -29,6 +31,12 @@ function App() {
           </Route>
           <Route path="/listpatient">
             <ListPatient />
+          </Route>
+          <Route path="/addOP">
+            <AddOP />
+          </Route>
+          <Route path="/addIP">
+            <AddIP />
           </Route>
           <Route path="/">
             <Login />

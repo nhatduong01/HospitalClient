@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AddPatient.css";
 import "./lib/bootstrap/bootstrap.min.css";
+import { useHistory } from "react-router";
 function AddPatient() {
   const [patientID, setpatientID] = useState("");
   const [FName, setFName] = useState("");
@@ -10,9 +11,9 @@ function AddPatient() {
   const [Gender, setGender] = useState("");
   const [Address, setAddress] = useState("");
   const [result, setresult] = useState("");
+  const history = useHistory();
   const AddPatientIN = (e) => {
     e.preventDefault();
-    console.log("addpatient");
     axios
       .post("http://localhost:4000/addnewpatient", {
         newID: patientID,
@@ -23,12 +24,21 @@ function AddPatient() {
         newAddress: Address,
       })
       .then((Response) => {
+        console.log(Response);
+        alert("Added successfully");
         setresult(Response.data);
         console.log(result);
+        if (patientID[0] == "I") history.push("/addIP");
+        else if (patientID[0] == "O") {
+          history.push("/addOP");
+        }
+      })
+      .catch((error) => {
+        alert("Added failed!!! Please check again "); //Logs a string: Error: Request failed with status code 404
       });
   };
   return (
-    <div className="AddPatientPage">
+    <div className="AddPatientPage1">
       <h1>Please input the patient</h1>
       <form class="PatientForm">
         <label htmlFor="name">Patient ID</label>

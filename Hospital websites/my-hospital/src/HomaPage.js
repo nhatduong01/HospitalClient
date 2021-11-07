@@ -1,11 +1,22 @@
 import React from "react";
 import { useHistory } from "react-router";
 import "./HomePage.css";
+import "./lib/bootstrap/bootstrap.min.css";
 function HomaPage() {
   const history = useHistory();
   return (
     <div className="HomePage">
-      <h1>Choose a function</h1>
+      <div className="Navigate">
+        <h1>Choose a function</h1>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/");
+          }}
+        >
+          Log out
+        </button>
+      </div>
       <div className="fourbuttons">
         <button
           onClick={(e) => {

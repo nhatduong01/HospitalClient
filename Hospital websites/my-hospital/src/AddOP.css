@@ -1,4 +1,4 @@
-.AddPatientPage1 {
+.AddPatientPage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@
   background-position: center;
   width: 100%;
 }
-.AddPatientPage1 > h1 {
+.AddPatientPage > h1 {
   font-size: 2.5 rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;

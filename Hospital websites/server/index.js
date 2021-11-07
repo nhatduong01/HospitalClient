@@ -113,6 +113,36 @@ app.post("/listpatient", (req, res) => {
     else res.send(result);
   });
 });
+app.post("/addOP", (req, res) => {
+  var nextdate = "";
+  if (req.body.nextExam == null) nextdate = "NULL";
+  else nextdate = `STR_TO_DATE('${req.body.nextExam}', '%Y-%m-%d')`;
+  const ADD_OP = `  INSERT INTO out_patient VALUES ('${req.body.patientID}', '${req.body.doctorID}')`;
+  const ADD_OP2 = `INSERT INTO Examination VALUES ('${req.body.patientID}', '${req.body.doctorID}', '${req.body.med}', STR_TO_DATE('${req.body.DataExam}','%Y-%m-%d'),${nextdate}, ${req.body.fee},'${req.body.diagnosis}');`;
+  db.query(ADD_OP);
+  db.query(ADD_OP2, (err) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    } else res.send("Patient has been added");
+  });
+});
+app.post("/addIP", (req, res) => {
+  var datedischarge = "";
+  if (req.body.discharge == null) datedischarge = "NULL";
+  else datedischarge = `STR_TO_DATE('${req.body.discharge}', '%Y-%m-%d')`;
+  const ADD_IP1 = `INSERT INTO in_patient VALUES ('${req.body.patientID}', '${req.body.room}',STR_TO_DATE('${req.body.DataExam}','%Y-%m-%d'), ${datedischarge}, '${req.body.diagnosis}', ${req.body.fee}, ${req.body.nurseID});`;
+  const ADD_IP2 = `INSERT INTO treatment VALUES ('${req.body.patientID}', '${req.body.DoctorID}', '${req.body.med}', STR_TO_DATE('${req.body.startdate}','%Y-%m-%d'),STR_TO_DATE('${req.body.EndDate}','%Y-%m-%d'), '${req.body.diagnosis}', '${req.body.status}' );`;
+  db.query(ADD_IP1);
+  db.query(ADD_IP2, (err) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    } else res.send("Patient has been added");
+  });
+});
 app.post("/login", (req, res) => {
   const username = req.body.userlog;
   const password = req.body.passwordlog;
