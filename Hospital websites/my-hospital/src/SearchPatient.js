@@ -43,7 +43,6 @@ function SearchPatient() {
     }
   };
   const renderheader = () => {
-    console.log("hello");
     if (ID[0] == "I") {
       return (
         <tr>
@@ -105,8 +104,7 @@ function SearchPatient() {
           <div className="card-block table-border-style">
             <div className="table-responsive">
               <table className="table table-bordered">
-                <thead>{renderheader}</thead>
-
+                <thead>{renderheader()}</thead>
                 {resultpatient.map((result) => RenderTable(result, ID))}
               </table>
             </div>
