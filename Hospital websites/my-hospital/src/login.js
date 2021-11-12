@@ -17,6 +17,8 @@ function Login() {
       .then((Response) => {
         if (Response.data.message) {
           setlogin(Response.data.message);
+          console.log("hii");
+          console.log(Response.data.message);
         } else {
           history.push("/homepage");
         }

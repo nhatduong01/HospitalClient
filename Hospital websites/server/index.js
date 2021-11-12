@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -74,15 +76,16 @@ app.post("/searchpatientinfo", (req, res) => {
 app.post("/register", (req, res) => {
   const username = req.body.userReg;
   const password = req.body.passwordReg;
-  console.log(username);
-  console.log(password);
-  const ADD_QUERY = `INSERT INTO hospital.userdata VALUES   ('${username}','${password}')`;
-  db.query(ADD_QUERY, (err) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(500);
-      return;
-    } else res.send("Task has been added");
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) console.log(err);
+    const ADD_QUERY = `INSERT INTO hospital.userdata VALUES   ('${username}','${hash}')`;
+    db.query(ADD_QUERY, (err) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+        return;
+      } else res.send("Task has been added");
+    });
   });
 });
 app.post("/addnewpatient", (req, res) => {
@@ -146,16 +149,18 @@ app.post("/addIP", (req, res) => {
 app.post("/login", (req, res) => {
   const username = req.body.userlog;
   const password = req.body.passwordlog;
-  console.log(username);
-  console.log(password);
-  const SELECT_QUERY = `SELECT * FROM userdata WHERE username = '${username}' AND password = '${password}'`;
+
+  const SELECT_QUERY = `SELECT * FROM userdata WHERE username = '${username}'`;
   db.query(SELECT_QUERY, (err, result) => {
     if (err) {
       res.send(err);
     }
     if (result.length > 0) {
-      res.send(result);
-    } else res.send({ message: "Wrong username or password!" });
+      bcrypt.compare(password, result[0].password, (err, finalresponse) => {
+        if (finalresponse) res.send(result);
+        else res.send({ message: "Wrong username or password!" });
+      });
+    } else res.send({ message: "username does not exist" });
   });
 });
 app.listen(4000, () => {
