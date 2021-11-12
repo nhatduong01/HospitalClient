@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddOP.css";
+import { useLocation } from "react-router-dom";
 function AddOP() {
-  const [patientID, setpatientID] = useState("");
   const [doctorID, setdoctorID] = useState("");
   const [medication, setmedication] = useState("");
   const [DateExam, setDateExam] = useState(Date(null));
@@ -10,11 +10,12 @@ function AddOP() {
   const [fee, setfee] = useState(0);
   const [diagnosis, setdiagnosis] = useState("");
   const [result, setresult] = useState("");
+  const location = useLocation();
   const addOP = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:4000/addOP", {
-        patientID: patientID,
+        patientID: location.state.ID,
         doctorID: doctorID,
         med: medication,
         DataExam: DateExam,
@@ -32,20 +33,11 @@ function AddOP() {
         alert("Added failed!!! Please check again "); //Logs a string: Error: Request failed with status code 404
       });
   };
+
   return (
     <div className="AddPatientPage">
       <h1>Please enter the information of Out Patient</h1>
       <form class="PatientForm">
-        <label htmlFor="name">Patient ID</label>
-        <input
-          name="ID"
-          placeholder="Please type again the patient ID"
-          type="text"
-          onChange={(e) => {
-            setpatientID(e.target.value);
-          }}
-          required
-        />
         <label htmlFor="name">Examing doctor ID</label>
         <input
           name="ID"

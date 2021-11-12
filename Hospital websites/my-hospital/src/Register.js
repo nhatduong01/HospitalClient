@@ -14,21 +14,24 @@ function Register() {
         passwordReg: password,
       })
       .then((Response) => {
-        console.log(Response);
+        history.push("/homepage");
+      })
+      .catch((err) => {
+        alert(err);
       });
-    history.push("/homepage");
   };
   return (
     <div className="LoginContainer">
       <div className="FormContainer">
         <h2>Register</h2>
-        <form className="FormContain">
+        <form className="FormContain" onSubmit={register}>
           <h5>Username</h5>
           <input
             type="text"
             onChange={(e) => {
               setuser(e.target.value);
             }}
+            required
           />
           <h5>Password</h5>
           <input
@@ -36,12 +39,9 @@ function Register() {
             onChange={(e) => {
               setpassword(e.target.value);
             }}
+            required
           />
-          <button
-            className="login_signinbutton"
-            type="submit"
-            onClick={register}
-          >
+          <button className="login_signinbutton" type="submit">
             Register
           </button>
         </form>

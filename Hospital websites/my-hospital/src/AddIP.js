@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+
 import "./AddIP.css";
 function AddIP() {
-  const [patientID, setpatientID] = useState("");
   const [nurseID, setnurseID] = useState("");
   const [room, setroom] = useState("");
   const [medication, setmedication] = useState("");
@@ -15,12 +16,12 @@ function AddIP() {
   const [Doctor, setDoctor] = useState("");
   const [StartDate, setStartDate] = useState(Date(null));
   const [EndDate, setEndDate] = useState(Date(null));
-
+  const location = useLocation();
   const addOP = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:4000/addIP", {
-        patientID: patientID,
+        patientID: location.state.ID,
         nurseID: nurseID,
         DoctorID: Doctor,
         med: medication,
@@ -46,17 +47,7 @@ function AddIP() {
   return (
     <div className="AddPatientPage">
       <h1>Please enter the information of In Patient</h1>
-      <form class="PatientForm">
-        <label htmlFor="name">Patient ID</label>
-        <input
-          name="ID"
-          placeholder="Please type again the patient ID"
-          type="text"
-          onChange={(e) => {
-            setpatientID(e.target.value);
-          }}
-          required
-        />
+      <form class="PatientForm" onSubmit={addOP}>
         <label htmlFor="name">SickRoom</label>
         <input
           name="ID"
@@ -128,6 +119,7 @@ function AddIP() {
           onChange={(e) => {
             setStartDate(e.target.value);
           }}
+          required
         ></input>
         <label htmlFor="day">End Date</label>
         <input
@@ -135,6 +127,7 @@ function AddIP() {
           onChange={(e) => {
             setEndDate(e.target.value);
           }}
+          required
         ></input>
         <label>Fee</label>
         <input
@@ -153,7 +146,7 @@ function AddIP() {
           }}
           required
         ></input>
-        <button type="submit" className="submitbutton" onClick={addOP}>
+        <button type="submit" className="submitbutton">
           Add
         </button>
       </form>

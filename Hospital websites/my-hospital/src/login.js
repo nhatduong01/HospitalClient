@@ -28,7 +28,7 @@ function Login() {
     <div className="LoginContainer">
       <div className="FormContainer">
         <h2>Sign In</h2>
-        <form className="FormContain">
+        <form className="FormContain" onSubmit={SignIn}>
           <h5>Username</h5>
           <input
             type="text"
@@ -45,7 +45,7 @@ function Login() {
             }}
             required
           />
-          <button className="login_signinbutton" type="submit" onClick={SignIn}>
+          <button className="login_signinbutton" type="submit">
             Sign In
           </button>
         </form>
