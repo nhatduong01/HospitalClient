@@ -37,7 +37,7 @@ function AddOP() {
   return (
     <div className="AddPatientPage">
       <h1>Please enter the information of Out Patient</h1>
-      <form class="PatientForm">
+      <form class="PatientForm" onSubmit={addOP}>
         <label htmlFor="name">Examing doctor ID</label>
         <input
           name="ID"
@@ -90,7 +90,7 @@ function AddOP() {
           }}
           required
         ></input>
-        <button type="submit" className="submitbutton" onClick={addOP}>
+        <button type="submit" className="submitbutton">
           Add
         </button>
       </form>
