@@ -1,0 +1,67 @@
+.AddPatientPage1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  width: auto;
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1602595688238-9fffe12d5af3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+.AddPatientPage1 > h1 {
+  font-size: 2.5 rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.PatientForm {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 30%;
+  justify-items: center;
+  align-items: center;
+}
+.PatientForm > input {
+  height: 40px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #121619;
+  color: black;
+  position: relative;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.PatientForm > label {
+  align-self: flex-start;
+  margin-top: 2hv;
+  margin-bottom: 2hv;
+  margin-left: 3vw;
+  font-weight: bold;
+  margin-bottom: hv;
+}
+.submitbutton {
+  margin-top: 1rem;
+  height: fit-content;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+.Addressinput {
+  margin-top: -20px;
+}
+.PatientForm > button {
+  width: 80%;
+  height: 2rem;
+  font-size: 1.4 rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background: #ffc500;
+}
+.PatientForm > button:hover {
+  cursor: pointer;
+  background: #e31837;
+  color: #fff;
+  transition: 0.2s ease-out;
+}

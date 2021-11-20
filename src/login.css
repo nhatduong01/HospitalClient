@@ -1,0 +1,68 @@
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(https://cdn.pixabay.com/photo/2017/08/18/12/23/building-2654823_960_720.jpg);
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(30%);
+  justify-content: center;
+}
+.LoginContainer > h2 {
+  color: #ffc500;
+}
+.FormContainer {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.FormContain {
+  display: flex;
+  flex-direction: column;
+}
+.FormContainer > form > input {
+  width: 97%;
+  height: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.FormContainer > h2 {
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #ffc500;
+  font-family: "Kanit", sans-serif;
+}
+.FormContain > h5 {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  color: #ffc500;
+  font-family: "Kanit", sans-serif;
+}
+.FormContain {
+  width: 100%;
+}
+.login_signinbutton {
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 2px;
+  cursor: pointer;
+  background: #ffc500;
+  font-family: "Kanit", sans-serif;
+}
+.SignUp {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.Linkregister {
+  color: #ffc500;
+}
