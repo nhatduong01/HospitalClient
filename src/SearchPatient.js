@@ -17,8 +17,8 @@ function SearchPatient() {
         }
       )
       .then((Response) => {
-        setresultpatient(Response.data);
         console.log(Response.data);
+        setresultpatient(Response.data);
       });
   };
   const RenderTable = (result, ID) => {

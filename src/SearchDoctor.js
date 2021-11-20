@@ -12,8 +12,8 @@ function ListPatient() {
         doctorID: ID,
       })
       .then((Response) => {
-        setresultpatient(Response.data);
         console.log(Response.data);
+        setresultpatient(Response.data);
       });
   };
   const RenderTable = (result, ID) => {
