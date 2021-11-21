@@ -14,7 +14,7 @@ function AddPatient() {
   const AddPatientIN = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/addnewpatient", {
+      .post("https://hospital-management-cc05.herokuapp.com/addnewpatient", {
         newID: patientID,
         newFname: FName,
         newLname: LName,

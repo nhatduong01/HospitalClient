@@ -9,7 +9,7 @@ function Register() {
   const register = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/register", {
+      .post("https://hospital-management-cc05.herokuapp.com/register", {
         userReg: user,
         passwordReg: password,
       })

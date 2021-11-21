@@ -8,12 +8,12 @@ function ListPatient() {
   const ListPatient = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/listpatient", {
+      .post("https://hospital-management-cc05.herokuapp.com/listpatient", {
         doctorID: ID,
       })
       .then((Response) => {
-        setresultpatient(Response.data);
         console.log(Response.data);
+        setresultpatient(Response.data);
       });
   };
   const RenderTable = (result, ID) => {

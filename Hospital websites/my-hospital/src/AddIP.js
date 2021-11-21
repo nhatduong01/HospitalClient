@@ -20,7 +20,7 @@ function AddIP() {
   const addOP = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/addIP", {
+      .post("https://hospital-management-cc05.herokuapp.com/addIP", {
         patientID: location.state.ID,
         nurseID: nurseID,
         DoctorID: Doctor,

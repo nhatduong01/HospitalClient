@@ -10,12 +10,15 @@ function SearchPatient() {
   const searchpatientinfo = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/searchpatientinfo", {
-        patientID: ID,
-      })
+      .post(
+        "https://hospital-management-cc05.herokuapp.com/searchpatientinfo",
+        {
+          patientID: ID,
+        }
+      )
       .then((Response) => {
-        setresultpatient(Response.data);
         console.log(Response.data);
+        setresultpatient(Response.data);
       });
   };
   const RenderTable = (result, ID) => {

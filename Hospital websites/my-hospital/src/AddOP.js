@@ -14,7 +14,7 @@ function AddOP() {
   const addOP = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/addOP", {
+      .post("https://hospital-management-cc05.herokuapp.com/addOP", {
         patientID: location.state.ID,
         doctorID: doctorID,
         med: medication,

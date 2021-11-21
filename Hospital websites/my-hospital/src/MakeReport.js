@@ -8,7 +8,7 @@ function MakeReport() {
   const report = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/makereport", {
+      .post("https://hospital-management-cc05.herokuapp.com/makereport", {
         patientID: ID,
       })
       .then((Response) => {

@@ -4,15 +4,23 @@ const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const app = express();
-app.use(cors());
+require("dotenv").config();
+app.use(
+  cors({
+    origin: "*",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "hospital",
+  host: "us-cdbr-east-04.cleardb.com",
+  user: "bb6ff4ceb6252a",
+  password: "72e02560",
+  database: "heroku_3789ff6df63142e",
 });
+//mysql://bb6ff4ceb6252a:72e02560@us-cdbr-east-04.cleardb.com/heroku_3789ff6df63142e?reconnect=true
 app.post("/makereport", (req, res) => {
   const REPORT_IP = `SELECT StartDate, EndDate, Result, Price AS medication_price
                       FROM TREATMENT JOIN medication ON treatment.Medication = medication.Code
@@ -78,7 +86,7 @@ app.post("/register", (req, res) => {
   const password = req.body.passwordReg;
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) console.log(err);
-    const ADD_QUERY = `INSERT INTO hospital.userdata VALUES   ('${username}','${hash}')`;
+    const ADD_QUERY = `INSERT INTO userdata VALUES   ('${username}','${hash}')`;
     db.query(ADD_QUERY, (err) => {
       if (err) {
         console.log(err);
@@ -163,6 +171,6 @@ app.post("/login", (req, res) => {
     } else res.send({ message: "username does not exist" });
   });
 });
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log("Running on port 4000");
 });
