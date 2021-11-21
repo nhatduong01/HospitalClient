@@ -26,11 +26,11 @@ function SearchPatient() {
       return (
         <tbody>
           <td>{result?.First_name}</td>
-          <td>{result?.LAst_name}</td>
+          <td>{result?.Last_name}</td>
           <td>{result?.Result}</td>
           <td>{result?.StartDate}</td>
           <td>{result?.EndDate}</td>
-          <td>{result?.patient_phone}</td>
+          <td>{result?.Phone_Num}</td>
         </tbody>
       );
     } else {
@@ -49,22 +49,22 @@ function SearchPatient() {
     if (ID[0] == "I") {
       return (
         <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Result</th>
-          <th>StartDate</th>
-          <th>EndDate</th>
-          <th>Phone Number</th>
+          <td>{result?.First_name}</td>
+          <td>{result?.Last_name}</td>
+          <td>{result?.Result}</td>
+          <td>{result?.StartDate}</td>
+          <td>{result?.EndDate}</td>
+          <td>{result?.Phone_Num}</td>
         </tr>
       );
     } else {
       return (
         <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Diagnosis</th>
-          <th>Date Examination</th>
-          <th>Phone Number</th>
+          <td>{result?.First_name}</td>
+          <td>{result?.Last_name}</td>
+          <td>{result?.Diagnosis}</td>
+          <td>{result?.DateExam}</td>
+          <td>{result?.Phone_Num}</td>
         </tr>
       );
     }
