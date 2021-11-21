@@ -26,21 +26,21 @@ function SearchPatient() {
       return (
         <tbody>
           <td>{result?.First_name}</td>
-          <td>{result?.LAst_name}</td>
+          <td>{result?.Last_name}</td>
           <td>{result?.Result}</td>
           <td>{result?.StartDate}</td>
           <td>{result?.EndDate}</td>
-          <td>{result?.patient_phone}</td>
+          <td>{result?.Phone_Num}</td>
         </tbody>
       );
     } else {
       return (
         <tbody>
           <td>{result?.First_name}</td>
-          <td>{result?.LAst_name}</td>
-          <td>{result?.diagnosis}</td>
+          <td>{result?.Last_name}</td>
+          <td>{result?.Diagnosis}</td>
           <td>{result?.DateExam}</td>
-          <td>{result?.patient_phone}</td>
+          <td>{result?.Phone_Num}</td>
         </tbody>
       );
     }
