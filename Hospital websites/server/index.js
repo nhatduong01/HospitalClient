@@ -14,7 +14,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "us-cdbr-east-04.cleardb.com",
   user: "bb6ff4ceb6252a",
   password: "72e02560",
@@ -41,34 +41,16 @@ app.post("/makereport", (req, res) => {
 });
 app.post("/searchpatientinfo", (req, res) => {
   console.log(req.body.patientID);
-  const SEARCH_QUERY1 = `With patientinfo
-                        AS(
-                        SELECT Patient.code, First_name, LAst_name,examination.DateExam, diagnosis
-                        FROM patient JOIN examination on patient.code = examination.patient 
-                        ),
-                        patient_phone_info AS
-                        (
-                        SELECT Code, group_concat(Phone_num) AS patient_phone
-                        FROM patient_phone
-                        GROUP BY Code
-                        )
-                        SELECT First_name, Last_name, DateExam, diagnosis, patient_phone_info.patient_phone
-                        FROM patientinfo LEFT OUTER JOIN patient_phone_info ON patientinfo.code = patient_phone_info.code
-                        WHERE patientinfo.code = '${req.body.patientID}'`;
-  const SEARCH_QUERY2 = `With patientinfo
-                          AS(
-                          SELECT Patient.code, First_name, LAst_name, StartDate, EndDate, Result
-                          FROM patient JOIN treatment on patient.code = treatment.patient 
-                          ),
-                          patient_phone_info AS
-                          (
-                          SELECT Code, group_concat(Phone_num) AS patient_phone
-                          FROM patient_phone
-                          GROUP BY Code
-                          )
-                          SELECT First_name, Last_name, StartDate, EndDate, Result, patient_phone_info.patient_phone
-                          FROM patientinfo LEFT OUTER JOIN patient_phone_info ON patientinfo.code = patient_phone_info.code
-                          WHERE patientinfo.code = '${req.body.patientID}'`;
+  const SEARCH_QUERY1 = `SELECT First_name, Last_name, DateExam, Diagnosis, Phone_Num
+                          FROM Patient 
+                            JOIN examination ON patient.Code = examination.Patient
+                              LEFT OUTER JOIN patient_phone on patient.Code = patient_phone.Code
+                          WHERE patient.Code= '${req.body.patientID}';`;
+  const SEARCH_QUERY2 = `SELECT First_name, Last_name, StartDate, EndDate, Result, patient_phone.Phone_Num
+                          FROM patient
+                            JOIN treatment ON patient.Code = treatment.Patient
+                              LEFT OUTER JOIN patient_phone ON patient.Code = patient_phone.Code
+                          WHERE patient.Code = '${req.body.patientID}';`;
 
   if (req.body.patientID[0] == "I")
     db.query(SEARCH_QUERY2, (err, result) => {
@@ -107,7 +89,9 @@ app.post("/addnewpatient", (req, res) => {
   });
 });
 app.post("/listpatient", (req, res) => {
-  const LIST_PATIENT = `WITH patientID (ID) AS
+  const LIST_PATIENT = `SELECT First_Name, Last_Name, DoB, Gender
+                        FROM patient
+                        WHERE patient.Code IN 
                         (
                         SELECT DISTINCT out_patient.Code 
                         FROM out_patient
@@ -116,9 +100,7 @@ app.post("/listpatient", (req, res) => {
                         SELECT DISTINCT treatment.Patient
                         FROM treatment
                         WHERE treatment.Doctor = '${req.body.doctorID}'
-                        )
-                        SELECT First_Name, Last_Name, DoB, Gender
-                        FROM patientID JOIN patient ON patientID.ID = patient.code`;
+                        );`;
   db.query(LIST_PATIENT, (err, result) => {
     if (err) res.send(err);
     else res.send(result);
